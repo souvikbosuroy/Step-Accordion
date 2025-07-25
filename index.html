@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step Accordion</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-size: 16px;
+            font-family: "Red Hat Display", sans-serif;
+            /* color: #fff; */
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .accordion_wrapper {
+            width: 558px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .accordion_wrapper .accordion_box_wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .accordion_wrapper .accordion_box_wrapper .accordion_header {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .accordion_wrapper .accordion_box_wrapper .accordion_header .step_count {
+            /* background-color: #FC02D4; */
+            background-color: #222222;
+            width: 95%;
+            padding: 15px 26px 22px 26px;
+            margin-bottom: -15px;
+            gap: 15px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            color: #fff;
+        }
+
+        .accordion_wrapper .accordion_box_wrapper .accordion_header .step_count.change_color {
+            background-color: #FC02D4;
+        }
+
+        .accordion_wrapper .accordion_box_wrapper .accordion_header .step_count .step_icon {
+            font-size: 11px;
+            margin-right: 5px;
+        }
+
+        span.step_title {
+            text-transform: uppercase;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+        }
+
+        .accordion_wrapper .accordion_box_wrapper .accordion_header .accordion_title {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 11px 24px 21px;
+            background-color: #FFFFFF;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #DEDEDE;
+        }
+
+        .accordion_wrapper .accordion_box_wrapper .accordion_header .accordion_title .title_header {
+            color: #222222;
+            font-size: 24px;
+            font-weight: 300;
+            font-family: "Fraunces", serif;
+            position: relative;
+            padding-left: 45px;
+        }
+
+        .accordion_wrapper .accordion_box_wrapper#box_1 .accordion_header .accordion_title .title_header::after {
+            content: '';
+            position: absolute;
+            width: 37px;
+            height: 42px;
+            background-image: url(/images/title_head.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .accordion_wrapper .accordion_box_wrapper#box_2 .accordion_header .accordion_title .title_header::after {
+            content: '';
+            position: absolute;
+            width: 37px;
+            height: 42px;
+            background-image: url(/images/Group.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .accordion_wrapper .accordion_box_wrapper#box_3 .accordion_header .accordion_title .title_header::after {
+            content: '';
+            position: absolute;
+            width: 37px;
+            height: 42px;
+            background-image: url(/images/df.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .accordion_wrapper .accordion_box_wrapper .accordion_header .accordion_title .control_arrow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                width: 37px;
+                height: 37px;
+            }
+        }
+
+        .accordion_wrapper .accordion_box_wrapper .accordion_header .accordion_title .control_arrow.close {
+            display: none;
+        }
+
+        .accordion_wrapper .accordion_box_wrapper .accordion_header .accordion_title .control_arrow.reverse_btn {
+            display: block;
+        }
+
+        .accordion_wrapper .accordion_box_wrapper .accordion_header .accordion_title .control_arrow.remove_expand {
+            display: none;
+        }
+
+        .accordion_wrapper .accordion_box_wrapper .accordion_description {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            border: 1px solid #DEDEDE;
+            background-color: #fff;
+            padding: 30px 23px 37px 21px;
+            border-radius: 15px;
+            display: none;
+            transition: all 0.5s ease;
+            margin-bottom: 10px;
+        }
+
+        .accordion_wrapper .accordion_box_wrapper .accordion_description p {
+            color: #4c4c4c;
+            letter-spacing: 0.08;
+            font-weight: 400;
+            line-height: 1.5em;
+            font-size: 16px;
+        }
+
+        .accordion_wrapper .accordion_box_wrapper .accordion_description ul {
+            width: 398px;
+            margin-top: 30px;
+            padding-left: 30px;
+
+            li {
+                margin-bottom: 15px;
+                list-style: url(/images/check.svg);
+            }
+        }
+
+        .accordion_wrapper .accordion_box_wrapper .accordion_description.open_content {
+            display: flex;
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="accordion_wrapper">
+        <div class="accordion_box_wrapper" id="box_1">
+            <div class="accordion_header">
+                <div class="step_count" id="step_1">
+                    <span class="step_icon"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="5.5" cy="5.5" r="5.5" fill="#fff" />
+                        </svg></span>
+                    <span class="step_title">Step 1</span>
+                </div>
+                <div class="accordion_title">
+                    <span class="title_header">Understand Your Baseline</span>
+                    <span class="control_arrow expand"><svg width="37" height="37" viewBox="0 0 37 37" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle opacity=".5" cx="18.5" cy="18.5" r="18.5" fill="#E0E0E0" />
+                            <path
+                                d="m23.91 14.866 1.06 1.061-5.777 5.779a.996.996 0 0 1-1.413 0L12 15.927l1.06-1.06 5.425 5.424z"
+                                fill="#222" />
+                        </svg></span>
+                    <span class="control_arrow close"><svg width="37" height="37" viewBox="0 0 37 37" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle opacity=".5" cx="18.5" cy="18.5" r="18" stroke="#222" />
+                            <path
+                                d="m23.91 22 1.06-1.061-5.777-5.78a.996.996 0 0 0-1.413 0L12 20.94 13.06 22l5.425-5.424z"
+                                fill="#222" />
+                        </svg></span>
+                </div>
+            </div>
+            <div class="accordion_description">
+                <p>Start with a comprehensive walk-in blood test and in-app health questionnaires. Together, they
+                    uncover what may be driving your symptoms — from inflammation and nutrient deficiencies to gut
+                    or
+                    immune imbalances.</p>
+                <ul>
+                    <li class="check"><strong>70+ lab markers</strong> — that’s 3x more testing than the average
+                        annual
+                        physical</li>
+                    <li class="check">Lab centers near you — 2,000+ patient service centers nationwide</li>
+                    <li class="check"><strong>Fast, walk-in appointments</strong> — no referral needed</li>
+                    <li class="check">Smart intake forms covering <strong>lifestyle, gut health, eating habits, and
+                            pain</strong></li>
+                </ul>
+            </div>
+        </div>
+        <div class="accordion_box_wrapper" id="box_2">
+            <div class="accordion_header">
+                <div class="step_count" id="step_1">
+                    <span class="step_icon"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="5.5" cy="5.5" r="5.5" fill="#fff" />
+                        </svg></span>
+                    <span class="step_title">Step 2</span>
+                </div>
+                <div class="accordion_title">
+                    <span class="title_header">Get Your Personalized Plan</span>
+                    <span class="control_arrow expand"><svg width="37" height="37" viewBox="0 0 37 37" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle opacity=".5" cx="18.5" cy="18.5" r="18.5" fill="#E0E0E0" />
+                            <path
+                                d="m23.91 14.866 1.06 1.061-5.777 5.779a.996.996 0 0 1-1.413 0L12 15.927l1.06-1.06 5.425 5.424z"
+                                fill="#222" />
+                        </svg></span>
+                    <span class="control_arrow close"><svg width="37" height="37" viewBox="0 0 37 37" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle opacity=".5" cx="18.5" cy="18.5" r="18" stroke="#222" />
+                            <path
+                                d="m23.91 22 1.06-1.061-5.777-5.78a.996.996 0 0 0-1.413 0L12 20.94 13.06 22l5.425-5.424z"
+                                fill="#222" />
+                        </svg></span>
+                </div>
+            </div>
+            <div class="accordion_description">
+                <p>Start with a comprehensive walk-in blood test and in-app health questionnaires. Together, they
+                    uncover what may be driving your symptoms — from inflammation and nutrient deficiencies to gut
+                    or
+                    immune imbalances.</p>
+                <ul>
+                    <li class="check"><strong>70+ lab markers</strong> — that’s 3x more testing than the average
+                        annual
+                        physical</li>
+                    <li class="check">Lab centers near you — 2,000+ patient service centers nationwide</li>
+                    <li class="check"><strong>Fast, walk-in appointments</strong> — no referral needed</li>
+                    <li class="check">Smart intake forms covering <strong>lifestyle, gut health, eating habits, and
+                            pain</strong></li>
+                </ul>
+            </div>
+        </div>
+        <div class="accordion_box_wrapper" id="box_3">
+            <div class="accordion_header">
+                <div class="step_count" id="step_1">
+                    <span class="step_icon"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="5.5" cy="5.5" r="5.5" fill="#fff" />
+                        </svg></span>
+                    <span class="step_title">Step 3</span>
+                </div>
+                <div class="accordion_title">
+                    <span class="title_header">Follow a 12-Week Plan with 1:1 Support</span>
+                    <span class="control_arrow expand"><svg width="37" height="37" viewBox="0 0 37 37" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle opacity=".5" cx="18.5" cy="18.5" r="18.5" fill="#E0E0E0" />
+                            <path
+                                d="m23.91 14.866 1.06 1.061-5.777 5.779a.996.996 0 0 1-1.413 0L12 15.927l1.06-1.06 5.425 5.424z"
+                                fill="#222" />
+                        </svg></span>
+                    <span class="control_arrow close"><svg width="37" height="37" viewBox="0 0 37 37" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle opacity=".5" cx="18.5" cy="18.5" r="18" stroke="#222" />
+                            <path
+                                d="m23.91 22 1.06-1.061-5.777-5.78a.996.996 0 0 0-1.413 0L12 20.94 13.06 22l5.425-5.424z"
+                                fill="#222" />
+                        </svg></span>
+                </div>
+            </div>
+            <div class="accordion_description">
+                <p>Start with a comprehensive walk-in blood test and in-app health questionnaires. Together, they
+                    uncover what may be driving your symptoms — from inflammation and nutrient deficiencies to gut
+                    or
+                    immune imbalances.</p>
+                <ul>
+                    <li class="check"><strong>70+ lab markers</strong> — that’s 3x more testing than the average
+                        annual
+                        physical</li>
+                    <li class="check">Lab centers near you — 2,000+ patient service centers nationwide</li>
+                    <li class="check"><strong>Fast, walk-in appointments</strong> — no referral needed</li>
+                    <li class="check">Smart intake forms covering <strong>lifestyle, gut health, eating habits, and
+                            pain</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<script src="/js/script.js"></script>
+</body>
+
+</html>
